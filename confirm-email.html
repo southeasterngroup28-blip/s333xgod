@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Email confirmed · S333XHUB</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='12'%20fill='%23000'/%3E%3Crect%20x='29'%20y='11'%20width='6'%20height='42'%20fill='%23fff'/%3E%3Crect%20x='17'%20y='23'%20width='30'%20height='6'%20fill='%23fff'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="site.css" />
+</head>
+<body class="auth">
+  <main>
+    <h1><a href="index.html">S333XHUB</a></h1>
+    <p class="lead">Email confirmation</p>
+    <p class="msg" id="msg">Checking your confirmation link.</p>
+  </main>
+  <script>
+    // Supabase's verify endpoint redirects here after confirming; a failure
+    // arrives as #error_description in the hash. The reason is logged, never
+    // shown: the fan gets one sentence either way.
+    const params = new URLSearchParams(location.hash.replace(/^#/, ''));
+    const error = params.get('error_description') || params.get('error');
+    const msg = document.getElementById('msg');
+    if (error) {
+      console.warn('[confirm-email]', error.replace(/\+/g, ' '));
+      msg.className = 'msg err';
+      msg.textContent =
+        'This link has expired or was already used. Open S333XHUB and sign in, or sign up again to get a new link.';
+    } else {
+      msg.className = 'msg ok';
+      msg.textContent = 'Your email is confirmed. Open S333XHUB and sign in.';
+    }
+  </script>
+</body>
+</html>
